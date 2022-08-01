@@ -7,3 +7,4 @@ pub mod problem_6;
 pub mod problem_7;
 pub mod problem_701;
 pub mod problem_8;
+pub mod problem_50;
