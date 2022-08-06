@@ -157,8 +157,13 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_solve() {
+    fn test_solve_for_4() {
         assert_eq!(792, solve(4));
+    }
+
+    #[test]
+    fn test_solve_for_5() {
+        assert_eq!(26033, solve(5));
     }
 
     #[test]
