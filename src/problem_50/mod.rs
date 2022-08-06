@@ -17,7 +17,7 @@ pub fn solve_v2(max: u64) -> u64 {
             starting_primes = working.clone();
         }
 
-        if is_prime(sum, 2) && sum > max_prime && working.len() > length {
+        if crate::is_prime(sum, 2) && sum > max_prime && working.len() > length {
             length = working.len();
             max_prime = sum;
         } else {
@@ -34,7 +34,7 @@ pub fn solve_v2(max: u64) -> u64 {
     while !working.is_empty() {
         working.pop_front();
         let sum: u64 = working.iter().sum();
-        if is_prime(sum, 2) && sum > max_prime && working.len() > length {
+        if crate::is_prime(sum, 2) && sum > max_prime && working.len() > length {
             length = working.len();
             max_prime = sum;
         } else if sum < max_prime {
@@ -63,28 +63,9 @@ fn get_primes(max: u64) -> VecDeque<u64> {
     primes
 }
 
-fn is_prime(n: u64, i: u64) -> bool {
-    if n <= 2 {
-        return n == 2;
-    }
-    if n % i == 0 {
-        return false;
-    }
-    if i * i > n {
-        return true;
-    }
-
-    is_prime(n, i + 1)
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_is_prime() {
-        assert!(is_prime(41, 2));
-    }
 
     #[test]
     fn test_solve_v2_for_100() {
