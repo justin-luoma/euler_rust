@@ -79,6 +79,10 @@ pub fn solve(set: u8) -> u64 {
                     sum += primes[loops[i]];
                 }
                 if min_prime_set > sum {
+                    for i in 0..max_loops {
+                        print!("{} ", primes[loops[i]]);
+                    }
+                    println!();
                     min_prime_set = sum;
                 }
                 loops[active_loop - 1] += 1;
