@@ -13,9 +13,7 @@ pub fn solve(set: u8) -> u64 {
     let max_loops = set as usize;
 
     let mut pairs: Vec<HashSet<u64>> = Vec::with_capacity(max_len);
-    for _ in 0..max_len {
-        pairs.push(HashSet::new())
-    }
+    pairs.resize(max_len, HashSet::new());
 
     let mut loops: Vec<usize> = vec![];
     loops.resize(max_loops, 1);
@@ -79,10 +77,10 @@ pub fn solve(set: u8) -> u64 {
                     sum += primes[loops[i]];
                 }
                 if min_prime_set > sum {
-                    for i in 0..max_loops {
-                        print!("{} ", primes[loops[i]]);
-                    }
-                    println!();
+                    // for i in 0..max_loops {
+                    //     print!("{} ", primes[loops[i]]);
+                    // }
+                    // println!();
                     min_prime_set = sum;
                 }
                 loops[active_loop - 1] += 1;
@@ -150,6 +148,162 @@ fn solve_slow(count: usize) -> u64 {
         })
         .map(|values| values.iter().sum::<u64>())
         .unwrap()
+}
+fn solve_5() -> u64 {
+    let max = 10_000;
+    let primes: Vec<u64> = prime_sieve::primes(max);
+
+    let mut min_prime_set = u64::MAX;
+
+    let mut pairs: Vec<HashSet<u64>> = Vec::with_capacity(primes.len());
+    for _ in 0..primes.len() {
+        pairs.push(HashSet::new())
+    }
+
+    for a in 1..primes.len() {
+        if primes[a] * 5 >= min_prime_set {
+            break;
+        }
+
+        if pairs[a].is_empty() {
+            pairs[a] = make_pairs(a as u64, &primes);
+        }
+
+        for b in a + 1..primes.len() {
+            if primes[a] + primes[b] * 4 >= min_prime_set {
+                break;
+            }
+            if !pairs[a].contains(&primes[b]) {
+                continue;
+            }
+            if pairs[b].is_empty() {
+                pairs[b] = make_pairs(b as u64, &primes);
+            }
+
+            for c in b + 1..primes.len() {
+                if primes[a] + primes[b] + primes[c] * 3 >= min_prime_set {
+                    break;
+                }
+                if !pairs[a].contains(&primes[c]) || !pairs[b].contains(&primes[c]) {
+                    continue;
+                }
+                if pairs[c].is_empty() {
+                    pairs[c] = make_pairs(c as u64, &primes);
+                }
+
+                for d in c + 1..primes.len() {
+                    if primes[a] + primes[b] + primes[c] + primes[d] * 2 >= min_prime_set {
+                        break;
+                    }
+                    if !pairs[a].contains(&primes[d])
+                        || !pairs[b].contains(&primes[d])
+                        || !pairs[c].contains(&primes[d])
+                    {
+                        continue;
+                    }
+                    if pairs[d].is_empty() {
+                        pairs[d] = make_pairs(d as u64, &primes);
+                    }
+
+                    for e in d + 1..primes.len() {
+                        if primes[a] + primes[b] + primes[c] + primes[d] + primes[e]
+                            >= min_prime_set
+                        {
+                            break;
+                        }
+                        if !pairs[a].contains(&primes[e])
+                            || !pairs[b].contains(&primes[e])
+                            || !pairs[c].contains(&primes[e])
+                            || !pairs[d].contains(&primes[e])
+                        {
+                            continue;
+                        }
+
+                        if min_prime_set > primes[a] + primes[b] + primes[c] + primes[d] + primes[e]
+                        {
+                            println!(
+                                "set: {} {} {} {} {}",
+                                primes[a], primes[b], primes[c], primes[d], primes[e]
+                            );
+                            min_prime_set =
+                                primes[a] + primes[b] + primes[c] + primes[d] + primes[e];
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    min_prime_set
+}
+
+fn solve_4() -> u64 {
+    let max = 10_000;
+
+    let primes: Vec<u64> = prime_sieve::primes(max);
+
+    let mut min_prime_set = u64::MAX;
+
+    let mut pairs: Vec<HashSet<u64>> = Vec::with_capacity(primes.len());
+    for _ in 0..primes.len() {
+        pairs.push(HashSet::new())
+    }
+
+    for a in 1..primes.len() {
+        if primes[a] * 4 >= min_prime_set {
+            break;
+        }
+
+        if pairs[a].is_empty() {
+            pairs[a] = make_pairs(a as u64, &primes);
+        }
+
+        for b in a + 1..primes.len() {
+            if primes[a] + primes[b] * 3 >= min_prime_set {
+                break;
+            }
+            if !pairs[a].contains(&primes[b]) {
+                continue;
+            }
+            if pairs[b].is_empty() {
+                pairs[b] = make_pairs(b as u64, &primes);
+            }
+
+            for c in b + 1..primes.len() {
+                if primes[a] + primes[b] + primes[c] * 2 >= min_prime_set {
+                    break;
+                }
+                if !pairs[a].contains(&primes[c]) || !pairs[b].contains(&primes[c]) {
+                    continue;
+                }
+                if pairs[c].is_empty() {
+                    pairs[c] = make_pairs(c as u64, &primes);
+                }
+
+                for d in c + 1..primes.len() {
+                    println!("[{}, {}, {}, {}]", a, b, c, d);
+                    if primes[a] + primes[b] + primes[c] + primes[d] >= min_prime_set {
+                        break;
+                    }
+                    if !pairs[a].contains(&primes[d])
+                        || !pairs[b].contains(&primes[d])
+                        || !pairs[c].contains(&primes[d])
+                    {
+                        continue;
+                    }
+
+                    if min_prime_set > primes[a] + primes[b] + primes[c] + primes[d] {
+                        println!("{} {} {} {}", primes[a], primes[b], primes[c], primes[d]);
+                        min_prime_set = primes[a] + primes[b] + primes[c] + primes[d];
+                    }
+                    break;
+                }
+            }
+        }
+    }
+
+    min_prime_set
 }
 
 fn concat_old(a: u64, b: u64) -> u64 {

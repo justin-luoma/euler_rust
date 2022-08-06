@@ -1,5 +1,7 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use euler::{problem_1, problem_2, problem_3, problem_4, problem_5, problem_6, problem_7};
+use euler::{
+    problem_1, problem_2, problem_3, problem_4, problem_5, problem_6, problem_60, problem_7,
+};
 
 pub fn benchmark_problem_1(c: &mut Criterion) {
     c.bench_function("problem 1", |b| {
@@ -37,6 +39,10 @@ pub fn benchmark_problem_7(c: &mut Criterion) {
     });
 }
 
+pub fn benchmark_problem_60(c: &mut Criterion) {
+    c.bench_function("problem 60", |b| b.iter(|| problem_60::solve(black_box(5))));
+}
+
 criterion_group!(
     benches,
     benchmark_problem_1,
@@ -45,6 +51,7 @@ criterion_group!(
     benchmark_problem_4,
     benchmark_problem_5,
     benchmark_problem_6,
-    benchmark_problem_7
+    benchmark_problem_7,
+    benchmark_problem_60
 );
 criterion_main!(benches);
