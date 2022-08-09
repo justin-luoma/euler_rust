@@ -1,3 +1,5 @@
+use std::collections::VecDeque;
+
 pub mod problem_1;
 pub mod problem_2;
 pub mod problem_3;
@@ -15,6 +17,8 @@ pub mod problem_60;
 #[allow(clippy::manual_range_contains)]
 #[allow(clippy::needless_range_loop)]
 pub mod problem_61;
+#[allow(dead_code)]
+pub mod problem_62;
 pub mod problem_7;
 pub mod problem_701;
 pub mod problem_8;
@@ -64,6 +68,18 @@ fn is_prime_v2(n: u64) -> bool {
     true
 }
 
+fn digits(n: u64) -> Vec<u8> {
+    let mut d = VecDeque::new();
+    let mut i = n;
+    while i > 0 {
+        let v = i % 10;
+        d.push_front(v as u8);
+        i /= 10;
+    }
+
+    d.into()
+}
+
 fn concat(a: u64, b: u64) -> u64 {
     if b == 0 {
         return a * 10;
@@ -103,5 +119,10 @@ mod tests {
     #[test]
     fn test_is_prime() {
         assert!(is_prime(41, 2));
+    }
+
+    #[test]
+    fn test_digits() {
+        assert_eq!(vec![8, 2, 6, 4], digits(8264));
     }
 }

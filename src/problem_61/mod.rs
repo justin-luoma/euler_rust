@@ -64,18 +64,6 @@ fn find_next(last: usize, length: usize, set: &mut Vec<u64>, nums: &Vec<Vec<u64>
     false
 }
 
-fn digits(n: u64) -> Vec<u8> {
-    let mut d = VecDeque::new();
-    let mut i = n;
-    while i > 0 {
-        let v = i % 10;
-        d.push_front(v as u8);
-        i /= 10;
-    }
-
-    d.into()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -83,10 +71,5 @@ mod tests {
     #[test]
     fn test_solve() {
         assert_eq!(28684, solve());
-    }
-
-    #[test]
-    fn test_digits() {
-        assert_eq!(vec![8, 2, 6, 4], digits(8264));
     }
 }
