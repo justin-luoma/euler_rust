@@ -1,58 +1,43 @@
-mod figurate;
-
-use crate::problem_61::figurate::figurate_sieve;
 use std::collections::VecDeque;
 
+use crate::problem_61::figurate::figurate_sieve;
+
+mod figurate;
+
 pub fn solve() -> u64 {
-    let mut triangle: Vec<u64> = vec![];
-    let mut square: Vec<u64> = vec![];
-    let mut pentagon: Vec<u64> = vec![];
-    let mut hexagon: Vec<u64> = vec![];
-    let mut heptagon: Vec<u64> = vec![];
-    let mut octagon: Vec<u64> = vec![];
-
     const MAX: u64 = 100;
-    rayon::scope(|s| {
-        s.spawn(|_| triangle = figurate_sieve(3, 175));
-        s.spawn(|_| square = figurate_sieve(4, MAX));
-        s.spawn(|_| pentagon = figurate_sieve(5, MAX));
-        s.spawn(|_| hexagon = figurate_sieve(6, MAX));
-        s.spawn(|_| heptagon = figurate_sieve(7, MAX));
-        s.spawn(|_| octagon = figurate_sieve(8, MAX));
-    });
+    let triangle: Vec<u64> = figurate_sieve(3, 175)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
+    let square: Vec<u64> = figurate_sieve(4, MAX)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
+    let pentagon: Vec<u64> = figurate_sieve(5, MAX)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
+    let hexagon: Vec<u64> = figurate_sieve(6, MAX)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
+    let heptagon: Vec<u64> = figurate_sieve(7, MAX)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
+    let octagon: Vec<u64> = figurate_sieve(8, MAX)
+        .iter()
+        .cloned()
+        .filter(|&i| i >= 1000 && i < 10000)
+        .collect();
 
-    let nums: Vec<Vec<u64>> = vec![
-        triangle
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-        square
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-        pentagon
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-        hexagon
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-        heptagon
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-        octagon
-            .iter()
-            .cloned()
-            .filter(|&i| i >= 1000 && i < 10000)
-            .collect(),
-    ];
+    let nums: Vec<Vec<u64>> = vec![triangle, square, pentagon, hexagon, heptagon, octagon];
 
     let mut set: Vec<u64> = vec![];
     set.resize(6, 0);
