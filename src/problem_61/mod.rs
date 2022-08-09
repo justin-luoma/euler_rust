@@ -5,39 +5,18 @@ use crate::problem_61::figurate::figurate_sieve;
 mod figurate;
 
 pub fn solve() -> u64 {
-    const MAX: u64 = 100;
-    let triangle: Vec<u64> = figurate_sieve(3, 175)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
-    let square: Vec<u64> = figurate_sieve(4, MAX)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
-    let pentagon: Vec<u64> = figurate_sieve(5, MAX)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
-    let hexagon: Vec<u64> = figurate_sieve(6, MAX)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
-    let heptagon: Vec<u64> = figurate_sieve(7, MAX)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
-    let octagon: Vec<u64> = figurate_sieve(8, MAX)
-        .iter()
-        .cloned()
-        .filter(|&i| i >= 1000 && i < 10000)
-        .collect();
+    const MAX: u64 = 150;
 
-    let nums: Vec<Vec<u64>> = vec![triangle, square, pentagon, hexagon, heptagon, octagon];
+    let nums: Vec<Vec<u64>> = (3..=8)
+        .into_iter()
+        .map(|sides| {
+            figurate_sieve(sides, MAX)
+                .iter()
+                .cloned()
+                .filter(|&i| i >= 1000 && i < 10000)
+                .collect()
+        })
+        .collect();
 
     let mut set: Vec<u64> = vec![];
     set.resize(6, 0);
@@ -52,30 +31,6 @@ pub fn solve() -> u64 {
     let sum = set.iter().sum();
 
     // println!("{:?}", set);
-    //
-    // set.iter().for_each(|v| {
-    //     print!("{} ", v);
-    //
-    //     if let Ok(i) = triangle.binary_search(v) {
-    //         print!("triangle: {} ", i);
-    //     }
-    //     if let Ok(i) = square.binary_search(v) {
-    //         print!("square: {} ", i);
-    //     }
-    //     if let Ok(i) = pentagon.binary_search(v) {
-    //         print!("pentagon: {} ", i);
-    //     }
-    //     if let Ok(i) = hexagon.binary_search(v) {
-    //         print!("hexagon: {} ", i);
-    //     }
-    //     if let Ok(i) = heptagon.binary_search(v) {
-    //         print!("heptagon: {} ", i);
-    //     }
-    //     if let Ok(i) = octagon.binary_search(v) {
-    //         print!("octagon: {} ", i);
-    //     }
-    //     println!();
-    // });
 
     sum
 }
