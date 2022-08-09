@@ -11,6 +11,9 @@ pub mod problem_56;
 pub mod problem_6;
 #[allow(dead_code)]
 pub mod problem_60;
+#[allow(dead_code)]
+#[allow(clippy::needless_range_loop)]
+pub mod problem_61;
 pub mod problem_7;
 pub mod problem_701;
 pub mod problem_8;
@@ -58,6 +61,20 @@ fn is_prime_v2(n: u64) -> bool {
     }
 
     true
+}
+
+fn concat(a: u64, b: u64) -> u64 {
+    if b == 0 {
+        return a * 10;
+    }
+    let mut a = a;
+    let mut c = b;
+    while c > 0 {
+        a *= 10;
+        c /= 10;
+    }
+
+    a + b
 }
 
 fn build_primes(max: u64) -> Vec<u64> {

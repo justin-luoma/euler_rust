@@ -1,4 +1,4 @@
-use crate::{build_primes, is_prime, is_prime_v2};
+use crate::{build_primes, concat, is_prime, is_prime_v2};
 use std::collections::HashSet;
 
 use itertools::Itertools;
@@ -122,17 +122,6 @@ fn make_pairs(a: u64, primes: &Vec<u64>) -> HashSet<u64> {
     }
 
     pairs
-}
-
-fn concat(a: u64, b: u64) -> u64 {
-    let mut a = a;
-    let mut c = b;
-    while c > 0 {
-        a *= 10;
-        c /= 10;
-    }
-
-    a + b
 }
 
 // takes 289621 seconds to calculate for 5
