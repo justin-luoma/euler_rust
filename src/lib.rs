@@ -12,6 +12,7 @@ pub mod problem_6;
 #[allow(dead_code)]
 pub mod problem_60;
 #[allow(dead_code)]
+#[allow(clippy::manual_range_contains)]
 #[allow(clippy::needless_range_loop)]
 pub mod problem_61;
 pub mod problem_7;
