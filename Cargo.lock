@@ -442,6 +442,7 @@ dependencies = [
 [[package]]
 name = "prime_sieve"
 version = "0.1.0"
+source = "git+https://gitlab.com/justin-luoma/prime_sieve#76557bcaa0a5015ce3717f848a060e1dcb14a402"
 dependencies = [
  "bitvec",
 ]

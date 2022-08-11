@@ -8,7 +8,7 @@ edition = "2021"
 
 [dependencies]
 chrono = { version = "0.4.19" }
-prime_sieve = { path = "../prime_sieve" }
+prime_sieve = { git = "https://gitlab.com/justin-luoma/prime_sieve" }
 ibig = { version = "0.3.5" }
 itertools = { version = "0.10.3" }
 rayon = { version = "1.5.3" }
