@@ -1,5 +1,3 @@
-use std::collections::VecDeque;
-
 use crate::problem_61::figurate::figurate_sieve;
 
 mod figurate;

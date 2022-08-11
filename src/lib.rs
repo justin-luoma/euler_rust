@@ -1,4 +1,7 @@
 use std::collections::VecDeque;
+use std::ops::{DivAssign, Rem};
+
+use num::{cast, zero, PrimInt};
 
 pub mod problem_1;
 pub mod problem_2;
@@ -19,8 +22,8 @@ pub mod problem_60;
 pub mod problem_61;
 #[allow(dead_code)]
 pub mod problem_62;
+pub mod problem_63;
 pub mod problem_7;
-pub mod problem_701;
 pub mod problem_8;
 
 fn is_prime(n: u64, i: u64) -> bool {
@@ -68,13 +71,17 @@ fn is_prime_v2(n: u64) -> bool {
     true
 }
 
-fn digits(n: u64) -> Vec<u8> {
+fn digits<T>(n: T) -> Vec<u8>
+where
+    T: PrimInt + DivAssign<T> + Rem<T>,
+    u8: Into<T>,
+{
     let mut d = VecDeque::new();
     let mut i = n;
-    while i > 0 {
-        let v = i % 10;
-        d.push_front(v as u8);
-        i /= 10;
+    while i > zero() {
+        let v = i.rem(10u8.into());
+        d.push_front(cast(v).unwrap());
+        i /= 10.into();
     }
 
     d.into()

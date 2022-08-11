@@ -7,11 +7,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-chrono = {version = "0.4.19"}
-prime_sieve = {path = "../prime_sieve"}
-ibig = {version = "0.3.5"}
-itertools = {version = "0.10.3"}
-rayon = {version = "1.5.3"}
+chrono = { version = "0.4.19" }
+prime_sieve = { path = "../prime_sieve" }
+ibig = { version = "0.3.5" }
+itertools = { version = "0.10.3" }
+rayon = { version = "1.5.3" }
+num = { version = "0.4.0" }
 
 [dev-dependencies]
 criterion = "0.3.6"

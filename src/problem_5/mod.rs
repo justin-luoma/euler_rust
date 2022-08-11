@@ -128,6 +128,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn test_large() {
         println!("{}", solve_v2(30));
         println!("{}", solve(30));

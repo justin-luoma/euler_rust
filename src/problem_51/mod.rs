@@ -109,11 +109,13 @@ mod tests {
     use super::*;
 
     #[test]
+    #[ignore]
     fn test_solve_for_6() {
         assert_eq!(13, solve(6));
     }
 
     #[test]
+    #[ignore]
     fn test_solve_for_7() {
         assert_eq!(56003, solve(7));
     }

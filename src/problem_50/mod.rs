@@ -78,6 +78,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn test_solve_v2_for_1_000_000() {
         assert_eq!(997651, solve_v2(1_000_000));
     }
