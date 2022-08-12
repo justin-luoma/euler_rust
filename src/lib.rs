@@ -13,6 +13,7 @@ pub mod problem_51;
 pub mod problem_52;
 pub mod problem_55;
 pub mod problem_56;
+pub mod problem_57;
 pub mod problem_6;
 #[allow(dead_code)]
 pub mod problem_60;
