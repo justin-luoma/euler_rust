@@ -21,7 +21,7 @@ pub fn solve() -> u64 {
     count
 }
 
-fn digits(n: UBig) -> Vec<u8> {
+pub fn digits(n: UBig) -> Vec<u8> {
     let mut d = VecDeque::new();
     let mut i = n;
     while i > UBig::zero() {
