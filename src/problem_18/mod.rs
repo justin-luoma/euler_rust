@@ -4,13 +4,13 @@ use std::io;
 use std::io::BufRead;
 
 pub fn solve(path: &str) -> u64 {
-    let file = File::open(path).unwrap();
+    let file = File::open(path).expect("Couldn't open file");
 
     let mut values: Vec<Vec<u64>> = BufReader::new(file)
         .lines()
         .flatten()
         .map(|line| {
-            line.split(' ')
+            line.split_whitespace()
                 .map(|s| s.to_string().parse().unwrap())
                 .collect()
         })
@@ -40,6 +40,6 @@ mod tests {
 
     #[test]
     fn test_solve_for_input() {
-        assert_eq!(23, solve("./src/problem_18/input.txt"));
+        assert_eq!(1074, solve("./src/problem_18/input.txt"));
     }
 }
