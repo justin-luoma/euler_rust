@@ -4,6 +4,7 @@ use std::ops::{DivAssign, Rem};
 use num::{cast, zero, PrimInt};
 
 pub mod problem_1;
+pub mod problem_18;
 pub mod problem_2;
 pub mod problem_3;
 pub mod problem_4;
@@ -25,9 +26,11 @@ pub mod problem_61;
 pub mod problem_62;
 pub mod problem_63;
 pub mod problem_64;
+#[allow(unused_variables)]
 pub mod problem_65;
 #[allow(non_snake_case)]
 pub mod problem_66;
+pub mod problem_67;
 pub mod problem_7;
 pub mod problem_8;
 
