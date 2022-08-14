@@ -57,7 +57,7 @@ fn learn() {
 #[allow(dead_code)]
 fn learn_2() {
     let mut h_n: Vec<BigUint> = vec![BigUint::from(0u32), BigUint::from(1u32)];
-    let mut a0: u32 = 2;
+    let a0: u32 = 2;
     let mut a_n: Vec<BigUint> = vec![
         BigUint::from(0u32),
         BigUint::from(0u32),
@@ -67,19 +67,19 @@ fn learn_2() {
     ];
 
     while a_n.len() < 102 {
-        let mut last_a = a_n.last().unwrap().clone();
+        let last_a = a_n.last().unwrap().clone();
         a_n.push(BigUint::from(1u32));
         a_n.push(BigUint::from(1u32));
         a_n.push(last_a + (BigUint::from(2u32)));
     }
 
     for n in 2..102 {
-        let mut next_h_n = a_n[n].clone() * h_n[n - 1].clone() + h_n[n - 2].clone();
+        let next_h_n = a_n[n].clone() * h_n[n - 1].clone() + h_n[n - 2].clone();
         h_n.push(next_h_n.clone());
         println!("{:?} {:?}", next_h_n, n - 1);
     }
-    let mut last_h_n = h_n.last().unwrap();
-    let s = String::from(format!("{:?}", last_h_n));
+    let last_h_n = h_n.last().unwrap();
+    let s = format!("{:?}", last_h_n);
     println!(
         "{}",
         s.chars().map(|c| c.to_digit(10).unwrap()).sum::<u32>()
