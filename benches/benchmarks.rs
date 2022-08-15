@@ -1,7 +1,7 @@
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use euler::{
     problem_1, problem_2, problem_3, problem_4, problem_5, problem_6, problem_60, problem_61,
-    problem_62, problem_7,
+    problem_62, problem_67, problem_7,
 };
 
 pub fn benchmark_problem_1(c: &mut Criterion) {
@@ -66,6 +66,10 @@ pub fn benchmark_problem_62(c: &mut Criterion) {
     // });
 }
 
+pub fn benchmark_problem_67(c: &mut Criterion) {
+    c.bench_function("problem 67", |b| b.iter(problem_67::solve_67));
+}
+
 criterion_group!(
     benches,
     benchmark_problem_1,
@@ -78,5 +82,6 @@ criterion_group!(
     benchmark_problem_60,
     benchmark_problem_61,
     benchmark_problem_62,
+    benchmark_problem_67,
 );
 criterion_main!(benches);

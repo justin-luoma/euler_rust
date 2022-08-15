@@ -31,6 +31,8 @@ pub mod problem_65;
 #[allow(non_snake_case)]
 pub mod problem_66;
 pub mod problem_67;
+#[allow(dead_code)]
+pub mod problem_69;
 pub mod problem_7;
 pub mod problem_8;
 
